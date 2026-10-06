@@ -1,4 +1,4 @@
-﻿const express = require('express');
+const express = require('express');
 const admin = require('firebase-admin');
 const cors = require('cors');
 
@@ -6,8 +6,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ফায়ারবেস সার্ভিস অ্যাকাউন্ট কি 
-const serviceAccount = require('./serviceAccountKey.json');
+// ফায়ারবেস সার্ভিস অ্যাকাউন্ট কি Vercel Environment Variable থেকে নেওয়া হচ্ছে
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
 if (!admin.apps.length) {
   admin.initializeApp({
@@ -38,13 +38,10 @@ app.post('/send-notification', async (req, res) => {
   }
 });
 
+// হোমপেজ রাউট
 app.get('/', (req, res) => {
-  res.send('Abhaynagar FCM Server is Running!');
+  res.send('Abhaynagar FCM Server is Running perfectly!');
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
-
+// Vercel এর জন্য শুধুমাত্র অ্যাপ এক্সপোর্ট করতে হবে, app.listen রাখা যাবে না
 module.exports = app;
