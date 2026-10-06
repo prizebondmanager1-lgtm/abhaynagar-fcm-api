@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "abhaynagar-fcm-api",
   "version": "1.0.0",
   "description": "FCM API",
@@ -9,6 +9,5 @@
   "dependencies": {
     "express": "^4.18.2",
     "firebase-admin": "^11.8.0"
-  
-}
+  }
 }
